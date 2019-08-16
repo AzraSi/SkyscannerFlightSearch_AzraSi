@@ -1,0 +1,1099 @@
+{
+	"info": {
+		"_postman_id": "bf3e7d39-ea04-4f7b-a084-544a28f8802d",
+		"name": "Smoke Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ST1 (SFS001)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0845ff6-9232-4f16-8117-628e6c002152",
+						"exec": [
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Important for sessionkey",
+							"pm.test(\"Location is present\", function () {",
+							"    pm.response.to.have.header(\"Location\");",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 800ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"//Empty JSON Response body",
+							"",
+							"pm.test(\"Check JSON Response body is empty\", function() {",
+							"var jsonData = JSON.parse(responseBody)",
+							"pm.expect(jsonData.lenght).to.eql(undefined)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+						"type": "text"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Country",
+							"value": "US",
+							"type": "text"
+						},
+						{
+							"key": "Currency",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "Locale",
+							"value": "en-GBP",
+							"type": "text"
+						},
+						{
+							"key": "OriginPlace",
+							"value": "SFO-sky",
+							"type": "text"
+						},
+						{
+							"key": "DestinationPlace",
+							"value": "LHR-sky",
+							"type": "text"
+						},
+						{
+							"key": "OutboundDate",
+							"value": "2019-11-30",
+							"type": "text"
+						},
+						{
+							"key": "Adults",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"pricing",
+						"v1.0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST2 (SFS032)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b88beb6-8145-4128-ac62-59f5b2013bdc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Checking Body parameters from ST1",
+							"//Country: US",
+							"",
+							"pm.test(\"Contains Country: US\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Query\");",
+							"    var jsonData = pm.response.json();",
+							"    var country = jsonData.Query.Country;",
+							"    var doesContainValidValue = false;",
+							"    if(country == \"US\"){",
+							"        doesContainValidValue = true;",
+							"    }",
+							"    pm.expect(doesContainValidValue).to.be.true;",
+							"});",
+							"",
+							"//Currency : USD",
+							"",
+							"pm.test(\"Contains Currency: USD\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Query\");",
+							"    var jsonData = pm.response.json();",
+							"    var currency = jsonData.Query.Currency;",
+							"    var doesContainValidValue = false;",
+							"    if(currency == \"USD\"){",
+							"        doesContainValidValue = true;",
+							"    }",
+							"    pm.expect(doesContainValidValue).to.be.true;",
+							"});",
+							"",
+							"// Locale: en-US",
+							"",
+							"pm.test(\"Contains Locale: en-US\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Query\");",
+							"    var jsonData = pm.response.json();",
+							"    var locale = jsonData.Query.Locale;",
+							"    var doesContainValidValue = false;",
+							"    if(locale == \"en-US\"){",
+							"        doesContainValidValue = true;",
+							"    }",
+							"    pm.expect(doesContainValidValue).to.be.true;",
+							"});",
+							"",
+							"// Adults: 1",
+							"",
+							"pm.test(\"Contains Adults=1\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Query\");",
+							"    var jsonData = pm.response.json();",
+							"    var adults = jsonData.Query.Adults;",
+							"    var doesContainValidValue = false;",
+							"    if(adults == 1){",
+							"        doesContainValidValue = true;",
+							"    }",
+							"    pm.expect(doesContainValidValue).to.be.true;",
+							"});",
+							"",
+							"// OutboundDate: 2019-11-30",
+							"",
+							"pm.test(\"Contains OutboundDate: 2019-11-30\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Query\");",
+							"    var jsonData = pm.response.json();",
+							"    var outboundDate = jsonData.Query.OutboundDate;",
+							"    var doesContainValidValue = false;",
+							"    if(outboundDate == \"2019-11-30\"){",
+							"        doesContainValidValue = true;",
+							"    }",
+							"    pm.expect(doesContainValidValue).to.be.true;",
+							"});",
+							"",
+							"",
+							"//Checking if OutboundDate is in future",
+							"",
+							"pm.test(\"Is date in future\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Query\");",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(pm.response.text()).to.include(\"OutboundDate\");",
+							"    var date = jsonData.Query.OutboundDate;",
+							"    var isValidDate = false;",
+							"    if(Date.parse(date)-Date.parse(new Date())>0)",
+							"    {",
+							"        isValidDate = true;",
+							"    }",
+							"   ",
+							"    pm.expect(isValidDate).to.be.true;",
+							"});",
+							"",
+							"//If Body contains OriginPlace",
+							"",
+							"pm.test(\"Body contains OriginPlace\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"OriginPlace\");",
+							"});",
+							"",
+							"",
+							"//If Body contains DestinationPlace",
+							"",
+							"pm.test(\"Body contains DestinationPlace\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DestinationPlace\");",
+							"});",
+							"",
+							"//If Body contains Children",
+							"",
+							"pm.test(\"Body contains Children\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Children\");",
+							"});",
+							"",
+							"//If Body contains Infants",
+							"",
+							"pm.test(\"Body contains Infants\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Infants\");",
+							"});",
+							"",
+							"//If Body contains CabinClass",
+							"",
+							"pm.test(\"Body contains CabinClass\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CabinClass\");",
+							"});",
+							"",
+							"//If Body contains GroupPricing",
+							"",
+							"pm.test(\"Body contains GroupPricing\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"GroupPricing\");",
+							"});",
+							"",
+							"//Checking if Status: UpdatesComplete",
+							"",
+							"pm.test(\"Status check\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Status\");",
+							"    var jsonData = pm.response.json();",
+							"    var status = jsonData.Status;",
+							"    var doesContainValidValue = false;",
+							"    if(status == \"UpdatesComplete\"){",
+							"        doesContainValidValue = true;",
+							"    }",
+							"    pm.expect(doesContainValidValue).to.be.true;",
+							"});",
+							"",
+							"//Agents not null",
+							"",
+							"pm.test(\"Agents is not null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var Itineraries = jsonData.Itineraries; ",
+							"        var isOk = true;",
+							"        for(i = 0; i < Itineraries.length; i++){",
+							"            for(j = 0; j < Itineraries[i].PricingOptions.length; j++){",
+							"                var agents = Itineraries[i].PricingOptions[j].Agents;",
+							"                if(agents === null){",
+							"                    isOk = false;",
+							"                }",
+							"            }",
+							"        }",
+							"       ",
+							"        pm.expect(isOk).to.be.true;",
+							"});",
+							"",
+							"//Checking Price",
+							"",
+							"pm.test(\"Price is not empty\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var Itineraries = jsonData.Itineraries; ",
+							"        var isOk = true;",
+							"        for(i = 0; i < Itineraries.length; i++){",
+							"            for(j = 0; j < Itineraries[i].PricingOptions.length; j++){",
+							"                var price = Itineraries[i].PricingOptions[j].Price;",
+							"                if(price.lengt){",
+							"                    isOk = false;",
+							"                }",
+							"            }",
+							"        }",
+							"       ",
+							"        pm.expect(isOk).to.be.true;",
+							"});",
+							"",
+							"//DeeplinkUrl is URL",
+							"",
+							"pm.test(\"Check if deep link is URL\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var Itineraries = jsonData.Itineraries; ",
+							"        var isOk = true;",
+							"        for(i = 0; i < Itineraries.length; i++){",
+							"            for(j = 0; j < Itineraries[i].PricingOptions.length; j++){",
+							"                var deeplinkUrl = Itineraries[i].PricingOptions[j].DeeplinkUrl;",
+							"                  var pattern = new RegExp('^(https?:\\\\/\\\\/)?'+ ",
+							"                    '((([a-z\\\\d]([a-z\\\\d-]*[a-z\\\\d])*)\\\\.)+[a-z]{2,}|'+ ",
+							"                    '((\\\\d{1,3}\\\\.){3}\\\\d{1,3}))'+ ",
+							"                    '(\\\\:\\\\d+)?(\\\\/[-a-z\\\\d%_.~+]*)*'+ ",
+							"                    '(\\\\?[;&a-z\\\\d%_.~+=-]*)?'+ ",
+							"                    '(\\\\#[-a-z\\\\d_]*)?$','i');",
+							"                    var check = pattern.test(deeplinkUrl);",
+							"                    if(check === false){",
+							"                        isOk = false;",
+							"                    }",
+							"            }",
+							"        }",
+							"       ",
+							"        pm.expect(isOk).to.be.true;",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"type": "text",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"type": "text",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sessionkey\n",
+							"value": "ae63b232-3e5f-4b49-b6f3-8c708c5de588",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/ab4c8b92-5fe0-485f-887e-c20667969414?",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"pricing",
+						"uk2",
+						"v1.0",
+						"ab4c8b92-5fe0-485f-887e-c20667969414"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST3 (SFS034)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d280ef10-44fb-432f-b319-294111404a70",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 600ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);",
+							"});",
+							"",
+							"pm.test(\"Body contains PlaceID\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"PlaceId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains PlaceName\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"PlaceName\");",
+							"});",
+							"",
+							"pm.test(\"Body contains CountryId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CountryId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains RegionId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"RegionId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains CityId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CityId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains CountryName\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CountryName\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+						"type": "text"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=Sarajevo",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"autosuggest",
+						"v1.0",
+						"UK",
+						"GBP",
+						"en-GB",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Sarajevo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST4 (SFS038)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "156a0d6c-de6d-4e38-992c-000132fa326f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Quotes",
+							"",
+							"pm.test(\"Body contains Quotes\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Quotes\");",
+							"});",
+							"",
+							"pm.test(\"Body contains QuoteId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"QuoteId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains MinPrice\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"MinPrice\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Direct\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Direct\");",
+							"});",
+							"",
+							"pm.test(\"Body contains OutboundLeg\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"OutboundLeg\");",
+							"});",
+							"",
+							"pm.test(\"Body contains DestinationId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DestinationId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains DepartureDate\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DepartureDate\");",
+							"});",
+							"",
+							"pm.test(\"Body contains QuoteDateTime\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"QuoteDateTime\");",
+							"});",
+							"",
+							"//Places",
+							"",
+							"pm.test(\"Body contains Places\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Places\");",
+							"});",
+							"",
+							"pm.test(\"Body contains PlaceId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"PlaceId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Name\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Name\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Type\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Type\");",
+							"});",
+							"",
+							"pm.test(\"Body contains SkyscannerCode\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"SkyscannerCode\");",
+							"});",
+							"",
+							"//Carriers",
+							"    ",
+							"pm.test(\"Body contains Carriers\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Carriers\");",
+							"});",
+							"",
+							"pm.test(\"Body contains CarrierId\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CarrierId\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Name\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Name\");",
+							"});",
+							"",
+							"//Currencies",
+							"",
+							"pm.test(\"Body contains Currencies\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Currencies\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Code\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Code\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Symbol\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Symbol\");",
+							"});",
+							"",
+							"pm.test(\"Body contains ThousandsSeparator\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ThousandsSeparator\");",
+							"});",
+							"",
+							"pm.test(\"Body contains DecimalSeparator\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DecimalSeparator\");",
+							"});",
+							"",
+							"pm.test(\"Body contains SymbolOnLeft\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"SymbolOnLeft\");",
+							"});",
+							"",
+							"pm.test(\"Body contains SpaceBetweenAmountAndSymbol\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"SpaceBetweenAmountAndSymbol\");",
+							"});",
+							"",
+							"pm.test(\"Body contains RoundingCoefficient\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"RoundingCoefficient\");",
+							"});",
+							"",
+							"pm.test(\"Body contains DecimalDigits\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DecimalDigits\");",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+						"type": "text"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"name": "Content-Type",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Country",
+							"value": "UK",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Currency",
+							"value": "GBP",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Locale",
+							"value": "en-GBP",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "OriginPlace\n",
+							"value": "SFO-sky",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "DestinationPlace\n",
+							"value": "LHR-sky",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Outboundpartialdate\n",
+							"value": "2019-10-30",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "inboundpartialdate\n",
+							"value": "2019-11-30",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-09-01",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"browsequotes",
+						"v1.0",
+						"US",
+						"USD",
+						"en-US",
+						"SFO-sky",
+						"JFK-sky",
+						"2019-09-01"
+					],
+					"query": [
+						{
+							"key": "inboundpartialdate\n",
+							"value": "2018-09-01",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST5 (SFS042)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b77c1fe-073d-494b-8ed5-be9e60315fb5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Routes",
+							"",
+							"pm.test(\"Body contains Routes\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Routes\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"type": "text",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"type": "text",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+					}
+				],
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/uS/USD/en-US/SFO-sky/ORD-sky/2019-09-01?",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"browseroutes",
+						"v1.0",
+						"uS",
+						"USD",
+						"en-US",
+						"SFO-sky",
+						"ORD-sky",
+						"2019-09-01"
+					],
+					"query": [
+						{
+							"key": "inboundpartialdate",
+							"value": "2018-13-01",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST6 (SFS046)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cbc4f451-1945-4094-a64a-4e6838f25c38",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Dates",
+							"",
+							"pm.test(\"Body contains Dates\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Dates\");",
+							"});",
+							"",
+							"pm.test(\"Body contains OutboundDates\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"OutboundDates\");",
+							"});",
+							"",
+							"pm.test(\"Body contains PartialDate\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"PartialDate\");",
+							"});",
+							"",
+							"pm.test(\"Body contains QuoteIds\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"QuoteIds\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Price\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Price\");",
+							"});",
+							"",
+							"pm.test(\"Body contains QuoteDateTime\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"QuoteDateTime\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+						"type": "text"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/SFO-sky/LAX-sky/2019-09-01?",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"browsedates",
+						"v1.0",
+						"US",
+						"USD",
+						"en-US",
+						"SFO-sky",
+						"LAX-sky",
+						"2019-09-01"
+					],
+					"query": [
+						{
+							"key": "inboundpartialdate",
+							"value": "****",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST7 (SFS053)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "02eccad7-3ef8-4ead-9d8c-db36959e86a7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Countries",
+							"",
+							"pm.test(\"Body contains Countries\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Countries\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Code\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Code\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Name\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Name\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"type": "text",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"type": "text",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+					}
+				],
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-US",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"reference",
+						"v1.0",
+						"countries",
+						"en-US"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ST8 (SFS054)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51f419f0-76f6-49db-8dd7-e339e9874834",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"//Currencies",
+							"",
+							"pm.test(\"Body contains Currencies\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Currencies\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Code\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Code\");",
+							"});",
+							"",
+							"pm.test(\"Body contains Symbol\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Symbol\");",
+							"});",
+							"",
+							"pm.test(\"Body contains ThousandsSeparator\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ThousandsSeparator\");",
+							"});",
+							"",
+							"pm.test(\"Body contains DecimalSeparator\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DecimalSeparator\");",
+							"});",
+							"",
+							"pm.test(\"Body contains SymbolOnLeft\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"SymbolOnLeft\");",
+							"});",
+							"",
+							"pm.test(\"Body contains SpaceBetweenAmountAndSymbol\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"SpaceBetweenAmountAndSymbol\");",
+							"});",
+							"",
+							"pm.test(\"Body contains RoundingCoefficient\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"RoundingCoefficient\");",
+							"});",
+							"",
+							"pm.test(\"Body contains DecimalDigits\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"DecimalDigits\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+						"type": "text"
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/currencies",
+					"protocol": "https",
+					"host": [
+						"skyscanner-skyscanner-flight-search-v1",
+						"p",
+						"rapidapi",
+						"com"
+					],
+					"path": [
+						"apiservices",
+						"reference",
+						"v1.0",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

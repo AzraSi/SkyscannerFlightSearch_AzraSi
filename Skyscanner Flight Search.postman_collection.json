@@ -1,0 +1,4821 @@
+{
+	"info": {
+		"_postman_id": "331274d7-ff6d-401c-b359-071d7e8f43dc",
+		"name": "Skyscanner Flight Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Live Flight Search",
+			"item": [
+				{
+					"name": "Create session with valid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f4aa87df-812e-4310-aa80-b5cf29325293",
+								"exec": [
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"pricing",
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing adults parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00dc7583-de55-43d0-815d-b2df727d7243",
+								"exec": [
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put value bigger then 8 for adults parametar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ad864b66-7a7c-4aa7-bd76-2f4726691a28",
+								"exec": [
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put value 0 for adults parametar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b0c5d36-4c85-429c-b503-99c6098dcd39",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put letters in adults parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c9e5c8ff-3031-4acd-af2c-afec7d02697d",
+								"exec": [
+									"pm.test(\"Session is not created\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400,500,501]);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "two",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put multiple spaces in adults parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d2b4e8f-1ec9-4bd2-a4ff-eb0215c3a8a5",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "                           2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid format for OutboundDate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2341b6c9-580f-44c7-8e5d-c46828186202",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10",
+									"type": "text"
+								},
+								{
+									"key": "Adult",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OutboundDate in the past",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2265d9ee-3487-4b81-98cf-f681782a2039",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2017-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adult",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MM and DD replaced in OutboundDate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04a70bad-fa4b-4093-9603-f3bcefca5f33",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2018-30-10",
+									"type": "text"
+								},
+								{
+									"key": "Adult",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty OutboundDate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04a70bad-fa4b-4093-9603-f3bcefca5f33",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Adult",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid February format for OutboundDate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04a70bad-fa4b-4093-9603-f3bcefca5f33",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2020-02-30",
+									"type": "text"
+								},
+								{
+									"key": "Adult",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put letters in OutboundDate parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ca3e99a-2ce0-4c4c-8be9-ad541a8cc0d1",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "two",
+									"type": "text"
+								},
+								{
+									"key": "Adult",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put space in OutboundDate parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b85804a-4d29-4116-83ab-1a5246df17cd",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": " 2019-09-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"pricing",
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OutboundDate in distant future",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "3019-09-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"pricing",
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing country parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c167c431-21f5-42aa-86e3-56b627bcfd4d",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing currency patameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95e4081a-9906-4a9a-8324-f0338199b66a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "LYD",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"pricing",
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replaced data for country and currency",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1043658-0a0f-4933-9a44-8bec4337831d",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "LYD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lowercase letters for country and currency parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "444614ac-69cc-41dd-a733-3bfd08cd06ad",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "uk",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "gbp",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Full name for country and currency",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "682c9408-1448-465b-8f35-1d15885085d9",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "Andora",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "Pound",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put symbol for currency parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "FBu",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty Locale parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "9",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty OriginPlace",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "9",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty DestinationPlace",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-28",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "9",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add all parameters including optional",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "Economy",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put something else other then \"Economy\", \"First\", \"PremiumEconomy\", \"Business\" for cabinClass",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "FirstClass",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put invalid date format in inboundDate field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "First",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put value bigger then 8 for children and infants parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "First",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put space in children parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "           2",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "First",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put space in cabinClass parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "                 First",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put space in infants parameter field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-10-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "First",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "                              2",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OutboundDate is later then inboundDate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53c7fdbc-d882-478b-9c8d-8427cc36b00c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "{{x-rapidapi-host}}"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "{{x-rapidapi-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "AD",
+									"type": "text"
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text"
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text"
+								},
+								{
+									"key": "OriginPlace",
+									"value": "SFO-sky",
+									"type": "text"
+								},
+								{
+									"key": "DestinationPlace",
+									"value": "LHR-sky",
+									"type": "text"
+								},
+								{
+									"key": "OutboundDate",
+									"value": "2019-12-30",
+									"type": "text"
+								},
+								{
+									"key": "Adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "inboundDate",
+									"value": "2019-11-30",
+									"type": "text"
+								},
+								{
+									"key": "cabinClass",
+									"value": "First",
+									"type": "text"
+								},
+								{
+									"key": "infants",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "groupPricing\n",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "excludeCarriers\n",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "includeCarriers\n",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/v1.0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "inboundDate\n",
+									"value": "2019-10-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid poll session results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3cf7b7f6-531e-4b22-aebb-319d8b7eb904",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "inboundArriveEndTime\n",
+									"value": "23:500",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/uk2/v1.0/6377b685-655e-4be7-be3f-eb9315a05d71?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"uk2",
+								"v1.0",
+								"6377b685-655e-4be7-be3f-eb9315a05d71"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Poll session results with query parameters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d56f7308-6a4e-42f9-ba96-8007bbe50cd3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sessionkey\n",
+									"value": "ae63b232-3e5f-4b49-b6f3-8c708c5de588",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/ae63b232-3e5f-4b49-b6f3-8c708c5de588?pageIndex=0&pageSize=10",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"pricing",
+								"uk2",
+								"v1.0",
+								"ae63b232-3e5f-4b49-b6f3-8c708c5de588"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "List Places with valid parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e343e288-2e52-4438-a5ea-1b46d4a811cd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/BAM/en-GB/?query=London",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"autosuggest",
+								"v1.0",
+								"UK",
+								"BAM",
+								"en-GB",
+								""
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "London"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query parameter missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5bc44270-6ed9-4c9c-b6c0-e28e9aeb36cb",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"autosuggest",
+								"v1.0",
+								"UK",
+								"GBP",
+								"en-GB",
+								""
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Sarajevo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Symbols in query parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "70a461ff-db9b-4ba2-a059-0a59f0bbb6d4",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=**",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"autosuggest",
+								"v1.0",
+								"UK",
+								"GBP",
+								"en-GB",
+								""
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "**"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query with one character",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f91a4346-dbe5-4a79-b6f3-1728776644c9",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=q",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"autosuggest",
+								"v1.0",
+								"UK",
+								"GBP",
+								"en-GB",
+								""
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "q"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Browse Flight Prices",
+			"item": [
+				{
+					"name": "Url for Quotes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "156a0d6c-de6d-4e38-992c-000132fa326f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"name": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "OriginPlace\n",
+									"value": "SFO-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DestinationPlace\n",
+									"value": "LHR-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Outboundpartialdate\n",
+									"value": "2019-10-30",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "inboundpartialdate\n",
+									"value": "2019-11-30",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-09-01",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsequotes",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"JFK-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate\n",
+									"value": "2018-09-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid url for Quotes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ada4f134-ddd1-49f2-94c1-0bdcc2dd7fec",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							},
+							{
+								"key": "",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "OriginPlace\n",
+									"value": "SFO-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DestinationPlace\n",
+									"value": "LHR-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Outboundpartialdate\n",
+									"value": "2019-10-30",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "inboundpartialdate\n",
+									"value": "2019-11-30",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/S/USD/en-US/SFO-sky/JFK-sky/2019-09-01",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsequotes",
+								"v1.0",
+								"S",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"JFK-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate\n",
+									"value": "2018-09-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url for Quotes with inboundpartialdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1cdd5c0a-611e-4e83-a329-d42265978005",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "OriginPlace\n",
+									"value": "SFO-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DestinationPlace\n",
+									"value": "LHR-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Outboundpartialdate\n",
+									"value": "2019-10-30",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-UK/SFO-sky/JFK-sky/2019-09-01?inboundpartialdate\n=2019-10-01    ",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsequotes",
+								"v1.0",
+								"US",
+								"USD",
+								"en-UK",
+								"SFO-sky",
+								"JFK-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate\n",
+									"value": "2019-10-01    "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid inboundpartialdate for Quotes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7a7c66d-f00a-4197-9592-25dd906eb6fe",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Country",
+									"value": "UK",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Currency",
+									"value": "GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Locale",
+									"value": "en-GBP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "OriginPlace\n",
+									"value": "SFO-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DestinationPlace\n",
+									"value": "LHR-sky",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Outboundpartialdate\n",
+									"value": "2019-10-30",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-UK/SFO-sky/JFK-sky/2019-09-01?inboundpartialdate\n=everytime",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsequotes",
+								"v1.0",
+								"US",
+								"USD",
+								"en-UK",
+								"SFO-sky",
+								"JFK-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate\n",
+									"value": "everytime"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url for Routes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b77c1fe-073d-494b-8ed5-be9e60315fb5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/uS/USD/en-US/SFO-sky/ORD-sky/2019-09-01?",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browseroutes",
+								"v1.0",
+								"uS",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"ORD-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "2018-13-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Url for Routes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7496502f-fdc8-4553-bda5-3a0917d5f8c4",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/2019-09-01?",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browseroutes",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"ORD-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "2018-13-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url for Routes with inboundpartialdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0febce59-1584-4ff6-84a1-3a1a76299e4b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/2019-09-01?inboundpartialdate=2019-10-01",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browseroutes",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"ORD-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "2019-10-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid inboundpartialdate for Routes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd9830e5-eaee-487d-8ad0-814cee71aa22",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/2019-09-01?inboundpartialdate=everytime",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browseroutes",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"ORD-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "everytime"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url for Dates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbc4f451-1945-4094-a64a-4e6838f25c38",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/SFO-sky/LAX-sky/2019-09-01?",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsedates",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"LAX-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "****",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Url for Dates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d74a3146-4a1b-4407-8903-f2a49cb351c5",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"type": "text",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"type": "text",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/S/USD/en-US/SFO-sky/LAX-sky/2019-09-01?",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsedates",
+								"v1.0",
+								"S",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"LAX-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "inboundpartialdate\": \"2019-12-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url for Dates with inboundpartialdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60a88ec-7892-42b4-b816-8f66d2ad0657",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/SFO-sky/LAX-sky/2019-09-01?inboundpartialdate=2019-10-01",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsedates",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"LAX-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "2019-10-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid inboundpartialdate for Dates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9c0147a-7303-458b-bc5c-016389d58fb5",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/SFO-sky/LAX-sky/2019-09-01?inboundpartialdate=everytime",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsedates",
+								"v1.0",
+								"US",
+								"USD",
+								"en-US",
+								"SFO-sky",
+								"LAX-sky",
+								"2019-09-01"
+							],
+							"query": [
+								{
+									"key": "inboundpartialdate",
+									"value": "everytime"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Browse Dates Inbound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9081c882-24f3-4286-90cc-e91083613072",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/UK/GBP/EN-US/uk/anywhere/2019-10-30/2019-11-25",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsedates",
+								"v1.0",
+								"UK",
+								"GBP",
+								"EN-US",
+								"uk",
+								"anywhere",
+								"2019-10-30",
+								"2019-11-25"
+							],
+							"query": [
+								{
+									"key": "x-rapidapi-host",
+									"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+									"disabled": true
+								},
+								{
+									"key": "x-rapidapi-key",
+									"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Browse Quotes Inbound",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/uk/gbp/en-us/uk/anywhere/anytime/anytime",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browsequotes",
+								"v1.0",
+								"uk",
+								"gbp",
+								"en-us",
+								"uk",
+								"anywhere",
+								"anytime",
+								"anytime"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Browse Routes Inbound",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-key",
+								"value": "{{x-rapidapi-key}}",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-host",
+								"value": "{{x-rapidapi-host}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/UK/GBP/EN-US/UK/anywhere/anytime/anytime",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"browseroutes",
+								"v1.0",
+								"UK",
+								"GBP",
+								"EN-US",
+								"UK",
+								"anywhere",
+								"anytime",
+								"anytime"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Localisation",
+			"item": [
+				{
+					"name": "List markets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02eccad7-3ef8-4ead-9d8c-db36959e86a7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-US",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"reference",
+								"v1.0",
+								"countries",
+								"en-US"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Currencies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-rapidapi-host",
+								"value": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "60318ff968mshff0628614de5306p162f9djsn762a747c19bb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/currencies",
+							"protocol": "https",
+							"host": [
+								"skyscanner-skyscanner-flight-search-v1",
+								"p",
+								"rapidapi",
+								"com"
+							],
+							"path": [
+								"apiservices",
+								"reference",
+								"v1.0",
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
